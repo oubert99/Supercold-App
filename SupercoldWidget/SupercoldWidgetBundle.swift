@@ -11,8 +11,8 @@ import SwiftUI
 @main
 struct SupercoldWidgetBundle: WidgetBundle {
     var body: some Widget {
-        SupercoldWidget()
-        SupercoldWidgetControl()
-        SupercoldWidgetLiveActivity()
+        // Our custom yearly grid widgets
+        YearlyGridWidget()
+        AppIconYearlyGridWidget()
     }
 }

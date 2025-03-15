@@ -1,0 +1,53 @@
+Supercold App - Product Requirements Document
+Overview
+Supercold is a cold shower habit-building app targeting fitness enthusiasts. The app uses gamification, tracking, and rewards to encourage users to maintain a daily cold shower routine.
+Target Audience
+Primary: Fitness bros and gals
+Secondary: Wellness seekers and self-improvement enthusiasts
+Business Model
+Free download with hard paywall after onboarding quiz
+Subscription-based using RevenueCat for payment processing
+No ads to maintain premium experience
+MVP Features (Priority Order)
+1. Calendar Tracker (HIGHEST PRIORITY)
+Visual calendar to track daily cold shower completion
+Streak counter showing consecutive days
+Weekly/monthly view toggle with smooth transitions
+Ability to mark days as complete/incomplete
+2. Streak-Based Rewards & Challenges
+Daily challenges based on user level
+Achievement badges for milestone streaks (7, 14, 30 days)
+Simple leveling system (Beginner → Ice Warrior)
+Basic virtual rewards for consistency
+3. Mood & Benefits Tracking
+Post-shower mood logging (energy, focus, recovery)
+Simple graphs showing progress over time
+Track cold exposure duration
+Future Features (Post-MVP)
+4. Social & Competition
+Leaderboards for friends and global users
+Team challenges
+Sharing capabilities for achievements
+5. AI Coach & Personalization
+Adaptive encouragement based on user patterns
+Customized challenge recommendations
+Personalized insights
+6. Advanced Reward System
+Expanded virtual economy
+Premium unlockable content
+Custom themes and sounds
+Technical Requirements
+SwiftUI for modern, responsive UI
+Local storage for offline functionality
+RevenueCat integration for subscriptions
+CloudKit for user data synchronization
+Onboarding Flow
+Welcome screens with app benefits
+Educational content on cold shower benefits (science-backed)
+Short quiz to personalize experience
+Hard paywall with subscription options
+Initial goal setting
+Timeline
+MVP: ASAP with core tracking functionality
+Phase 2: Streak rewards and challenges (2 weeks after MVP)
+Phase 3: Mood tracking and graphs (1 month after MVP)

@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		B96CC2C72D85B27000751EDE /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B96CC2C62D85B27000751EDE /* WidgetKit.framework */; };
+		B96CC2C92D85B27000751EDE /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B96CC2C82D85B27000751EDE /* SwiftUI.framework */; };
+		B96CC2DA2D85B27800751EDE /* SupercoldWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B96CC2C42D85B27000751EDE /* SupercoldWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		B943A8AC2D835022005DB1AF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -21,13 +27,48 @@
 			remoteGlobalIDString = B943A89A2D835015005DB1AF;
 			remoteInfo = Supercold;
 		};
+		B96CC2D82D85B27800751EDE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B943A8932D835015005DB1AF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B96CC2C32D85B27000751EDE;
+			remoteInfo = SupercoldWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B96CC2DF2D85B27900751EDE /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B96CC2DA2D85B27800751EDE /* SupercoldWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B943A89B2D835015005DB1AF /* Supercold.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Supercold.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B943A8AB2D835022005DB1AF /* SupercoldTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SupercoldTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B943A8B52D835022005DB1AF /* SupercoldUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SupercoldUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B96CC2C42D85B27000751EDE /* SupercoldWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SupercoldWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B96CC2C62D85B27000751EDE /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		B96CC2C82D85B27000751EDE /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		B96CC2E12D85B31A00751EDE /* SupercoldWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SupercoldWidgetExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		B96CC2DB2D85B27800751EDE /* Exceptions for "SupercoldWidget" folder in "SupercoldWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = B96CC2C32D85B27000751EDE /* SupercoldWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		B943A89D2D835015005DB1AF /* Supercold */ = {
@@ -43,6 +84,14 @@
 		B943A8B82D835022005DB1AF /* SupercoldUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = SupercoldUITests;
+			sourceTree = "<group>";
+		};
+		B96CC2CA2D85B27000751EDE /* SupercoldWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				B96CC2DB2D85B27800751EDE /* Exceptions for "SupercoldWidget" folder in "SupercoldWidgetExtension" target */,
+			);
+			path = SupercoldWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -69,15 +118,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B96CC2C12D85B27000751EDE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B96CC2C92D85B27000751EDE /* SwiftUI.framework in Frameworks */,
+				B96CC2C72D85B27000751EDE /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		B943A8922D835015005DB1AF = {
 			isa = PBXGroup;
 			children = (
+				B96CC2E12D85B31A00751EDE /* SupercoldWidgetExtension.entitlements */,
 				B943A89D2D835015005DB1AF /* Supercold */,
 				B943A8AE2D835022005DB1AF /* SupercoldTests */,
 				B943A8B82D835022005DB1AF /* SupercoldUITests */,
+				B96CC2CA2D85B27000751EDE /* SupercoldWidget */,
+				B96CC2C52D85B27000751EDE /* Frameworks */,
 				B943A89C2D835015005DB1AF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,8 +149,18 @@
 				B943A89B2D835015005DB1AF /* Supercold.app */,
 				B943A8AB2D835022005DB1AF /* SupercoldTests.xctest */,
 				B943A8B52D835022005DB1AF /* SupercoldUITests.xctest */,
+				B96CC2C42D85B27000751EDE /* SupercoldWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B96CC2C52D85B27000751EDE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B96CC2C62D85B27000751EDE /* WidgetKit.framework */,
+				B96CC2C82D85B27000751EDE /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,10 +173,12 @@
 				B943A8972D835015005DB1AF /* Sources */,
 				B943A8982D835015005DB1AF /* Frameworks */,
 				B943A8992D835015005DB1AF /* Resources */,
+				B96CC2DF2D85B27900751EDE /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B96CC2D92D85B27800751EDE /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				B943A89D2D835015005DB1AF /* Supercold */,
@@ -163,6 +236,28 @@
 			productReference = B943A8B52D835022005DB1AF /* SupercoldUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		B96CC2C32D85B27000751EDE /* SupercoldWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B96CC2DC2D85B27900751EDE /* Build configuration list for PBXNativeTarget "SupercoldWidgetExtension" */;
+			buildPhases = (
+				B96CC2C02D85B27000751EDE /* Sources */,
+				B96CC2C12D85B27000751EDE /* Frameworks */,
+				B96CC2C22D85B27000751EDE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				B96CC2CA2D85B27000751EDE /* SupercoldWidget */,
+			);
+			name = SupercoldWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = SupercoldWidgetExtension;
+			productReference = B96CC2C42D85B27000751EDE /* SupercoldWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -184,6 +279,9 @@
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = B943A89A2D835015005DB1AF;
 					};
+					B96CC2C32D85B27000751EDE = {
+						CreatedOnToolsVersion = 16.2;
+					};
 				};
 			};
 			buildConfigurationList = B943A8962D835015005DB1AF /* Build configuration list for PBXProject "Supercold" */;
@@ -203,6 +301,7 @@
 				B943A89A2D835015005DB1AF /* Supercold */,
 				B943A8AA2D835022005DB1AF /* SupercoldTests */,
 				B943A8B42D835022005DB1AF /* SupercoldUITests */,
+				B96CC2C32D85B27000751EDE /* SupercoldWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -223,6 +322,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B943A8B32D835022005DB1AF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B96CC2C22D85B27000751EDE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -253,6 +359,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B96CC2C02D85B27000751EDE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -265,6 +378,11 @@
 			isa = PBXTargetDependency;
 			target = B943A89A2D835015005DB1AF /* Supercold */;
 			targetProxy = B943A8B62D835022005DB1AF /* PBXContainerItemProxy */;
+		};
+		B96CC2D92D85B27800751EDE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B96CC2C32D85B27000751EDE /* SupercoldWidgetExtension */;
+			targetProxy = B96CC2D82D85B27800751EDE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -393,6 +511,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Supercold/Supercold.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Supercold/Preview Content\"";
@@ -422,6 +541,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Supercold/Supercold.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Supercold/Preview Content\"";
@@ -518,6 +638,62 @@
 			};
 			name = Release;
 		};
+		B96CC2DD2D85B27900751EDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = SupercoldWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z7KKXHR2MY;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SupercoldWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SupercoldWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oumar.Supercold.SupercoldWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B96CC2DE2D85B27900751EDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = SupercoldWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z7KKXHR2MY;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SupercoldWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SupercoldWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oumar.Supercold.SupercoldWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -553,6 +729,15 @@
 			buildConfigurations = (
 				B943A8C62D835022005DB1AF /* Debug */,
 				B943A8C72D835022005DB1AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B96CC2DC2D85B27900751EDE /* Build configuration list for PBXNativeTarget "SupercoldWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B96CC2DD2D85B27900751EDE /* Debug */,
+				B96CC2DE2D85B27900751EDE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
