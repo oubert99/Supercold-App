@@ -22,7 +22,7 @@ struct ColdShowerLogView: View {
         return formatter
     }()
     
-    private let moods = ["Energized", "Motivated", "Clear-minded", "Refreshed", "Focused", "Calm", "Strong"]
+    private let moods = ["Super-Energized", "Super-Motivated", "Super-Clear-headed", "Super-Refreshed", "Super-Focused", "Super-Calm", "Super-Strong", "Super-Awake", "Super-Tough", "Super-Sharp", "Super-Brave", "Super-Alert", "Super-Happy", "Super-Relaxed", "Super-Warm inside", "Super-Fresh", "Super-Light", "Super-Confident", "Super-Alive", "Super-Powerful"]
     
     var body: some View {
         ZStack {
@@ -84,6 +84,9 @@ struct ColdShowerLogView: View {
                             .default(Text("Print Completed Days")) {
                                 calendarData.printCompletedDays()
                             },
+                            .default(Text("Reset Slider")) {
+                                resetView()
+                            },
                             .cancel()
                         ]
                     )
@@ -112,10 +115,28 @@ struct ColdShowerLogView: View {
             
             if showerCompleted {
                 completedView
+                    .transition(.asymmetric(
+                        insertion: .scale(scale: 0.8).combined(with: .opacity),
+                        removal: .scale(scale: 1.2).combined(with: .opacity)
+                    ))
             } else {
-                loggerView
+                if showMoodSelection {
+                    moodSelectionView
+                        .transition(.asymmetric(
+                            insertion: .scale(scale: 0.8).combined(with: .opacity),
+                            removal: .scale(scale: 1.2).combined(with: .opacity)
+                        ))
+                } else {
+                    loggerView
+                        .transition(.asymmetric(
+                            insertion: .scale(scale: 0.8).combined(with: .opacity),
+                            removal: .scale(scale: 1.2).combined(with: .opacity)
+                        ))
+                }
             }
         }
+        .animation(.spring(response: 0.5, dampingFraction: 0.8), value: showerCompleted)
+        .animation(.spring(response: 0.5, dampingFraction: 0.8), value: showMoodSelection)
     }
     
     // Completed view with selected moods
@@ -242,7 +263,8 @@ struct ColdShowerLogView: View {
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(Color.black, lineWidth: 3)
             )
-            .frame(width: max(60, CGFloat(sliderValue) * UIScreen.main.bounds.width * 0.7), height: 60)
+            .frame(width: CGFloat(sliderValue) * UIScreen.main.bounds.width * 0.7, height: 60)
+            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: sliderValue)
     }
                             
     // Slider thumb
@@ -268,7 +290,7 @@ struct ColdShowerLogView: View {
                         .foregroundColor(.black)
                 )
         }
-        .offset(x: max(25, CGFloat(sliderValue) * (UIScreen.main.bounds.width * 0.7 - 50)))
+        .offset(x: sliderValue * (UIScreen.main.bounds.width * 0.7 - 50))
         .gesture(
             DragGesture()
                 .onChanged(onSliderDragChanged)
@@ -283,11 +305,6 @@ struct ColdShowerLogView: View {
                 .font(.system(size: 28, weight: .black, design: .rounded))
                 .foregroundColor(.black)
                 .padding(.top, 20)
-            
-            Text("Select up to 3 that apply")
-                .font(.system(size: 16, weight: .bold, design: .rounded))
-                .foregroundColor(.black)
-                .padding(.bottom, 5)
             
             // Mood selection pills - fixed alignment
             moodSelectionGrid
@@ -324,60 +341,19 @@ struct ColdShowerLogView: View {
     
     // Mood selection grid
     private var moodSelectionGrid: some View {
-        VStack(alignment: .center, spacing: 15) {
-            // First row
-            HStack(spacing: 10) {
-                MoodPillButton(
-                    mood: moods[0],
-                    isSelected: selectedMoods.contains(moods[0]),
-                    action: { toggleMood(moods[0]) }
-                )
-                MoodPillButton(
-                    mood: moods[1],
-                    isSelected: selectedMoods.contains(moods[1]),
-                    action: { toggleMood(moods[1]) }
-                )
+        ScrollView {
+            FlowLayout(spacing: 8) {
+                ForEach(moods, id: \.self) { mood in
+                    MoodPillButton(
+                        mood: mood,
+                        isSelected: selectedMoods.contains(mood),
+                        action: { toggleMood(mood) }
+                    )
+                }
             }
-            
-            // Second row
-            HStack(spacing: 10) {
-                MoodPillButton(
-                    mood: moods[2],
-                    isSelected: selectedMoods.contains(moods[2]),
-                    action: { toggleMood(moods[2]) }
-                )
-                MoodPillButton(
-                    mood: moods[3],
-                    isSelected: selectedMoods.contains(moods[3]),
-                    action: { toggleMood(moods[3]) }
-                )
-            }
-            
-            // Third row
-            HStack(spacing: 10) {
-                MoodPillButton(
-                    mood: moods[4],
-                    isSelected: selectedMoods.contains(moods[4]),
-                    action: { toggleMood(moods[4]) }
-                )
-                MoodPillButton(
-                    mood: moods[5],
-                    isSelected: selectedMoods.contains(moods[5]),
-                    action: { toggleMood(moods[5]) }
-                )
-            }
-            
-            // Fourth row (single item centered)
-            HStack {
-                Spacer()
-                MoodPillButton(
-                    mood: moods[6],
-                    isSelected: selectedMoods.contains(moods[6]),
-                    action: { toggleMood(moods[6]) }
-                )
-                Spacer()
-            }
+            .padding(.vertical, 10)
         }
+        .frame(maxHeight: 300)
     }
     
     // MARK: - Event Handlers
@@ -386,11 +362,11 @@ struct ColdShowerLogView: View {
         if !sliderCompleted {
             // Calculate slider value based on drag position
             let width = UIScreen.main.bounds.width * 0.7 - 50
-            let newValue = min(1.0, max(0, Double(value.location.x - 25) / Double(width)))
+            let newValue = min(1.0, max(0, Double(value.location.x) / Double(width)))
             sliderValue = newValue
             
-            // Check if slider is completed
-            if newValue >= 0.95 {
+            // Check if slider is completed - now requires reaching 99.5% instead of 95%
+            if newValue >= 0.995 {
                 withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                     sliderCompleted = true
                     sliderValue = 1.0
@@ -399,10 +375,10 @@ struct ColdShowerLogView: View {
                     logCompletionInCalendar()
                 }
                 
-                // Show mood selection immediately without delays
-                contentOpacity = 0
-                showMoodSelection = true
-                moodSelectionOpacity = 1.0
+                // Show mood selection with morphing animation
+                withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+                    showMoodSelection = true
+                }
             }
         }
     }
@@ -419,10 +395,7 @@ struct ColdShowerLogView: View {
         if selectedMoods.contains(mood) {
             selectedMoods.remove(mood)
         } else {
-            // Only add if we haven't reached the maximum of 3 moods
-            if selectedMoods.count < 3 {
-                selectedMoods.insert(mood)
-            }
+            selectedMoods.insert(mood)
         }
     }
     
@@ -435,32 +408,28 @@ struct ColdShowerLogView: View {
         // Save the selected moods to the shared CalendarData
         calendarData.saveMoods(for: currentDate, moods: selectedMoods)
         
-        // Fade out mood selection
-        withAnimation(.easeInOut(duration: 0.5)) {
+        withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
             moodSelectionOpacity = 0
-        }
-        
-        // Hide mood selection and show completed view
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             showMoodSelection = false
             showerCompleted = true
-            
-            withAnimation(.easeInOut(duration: 0.5)) {
-                contentOpacity = 1.0
-            }
+            contentOpacity = 1.0
         }
     }
             
     private func resetView() {
-        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+        withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+            showMoodSelection = false
             showerCompleted = false
             sliderCompleted = false
             sliderValue = 0
+            contentOpacity = 1.0
+            moodSelectionOpacity = 0
+            selectedMoods.removeAll()
         }
     }
 }
 
-// Mood pill button component
+// Mood pill button component with animation
 struct MoodPillButton: View {
     let mood: String
     let isSelected: Bool
@@ -490,6 +459,7 @@ struct MoodPillButton: View {
                     }
                 )
         }
+        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isSelected)
     }
 }
 
@@ -528,22 +498,52 @@ struct FlowLayout: Layout {
         var x = bounds.minX
         var y = bounds.minY
         var maxHeight: CGFloat = 0
+        var rowWidth: CGFloat = 0
+        var rowViews: [LayoutSubviews.Element] = []
         
+        // First pass: collect views for each row
         for view in subviews {
             let viewSize = view.sizeThatFits(.unspecified)
+            
             if x + viewSize.width > bounds.maxX {
+                // Center the current row
+                let rowCenter = bounds.midX
+                let rowStart = rowCenter - rowWidth / 2
+                
+                // Place views in centered row
+                var xPos = rowStart
+                for rowView in rowViews {
+                    let rowViewSize = rowView.sizeThatFits(.unspecified)
+                    rowView.place(at: CGPoint(x: xPos, y: y), proposal: ProposedViewSize(width: rowViewSize.width, height: rowViewSize.height))
+                    xPos += rowViewSize.width + spacing
+                }
+                
                 // Move to next row
                 y += maxHeight + spacing
                 x = bounds.minX
                 maxHeight = 0
+                rowWidth = 0
+                rowViews = []
             }
             
-            // Place the view
-            view.place(at: CGPoint(x: x, y: y), proposal: ProposedViewSize(width: viewSize.width, height: viewSize.height))
-            
-            // Update position for next view
+            // Add to current row
+            rowViews.append(view)
+            rowWidth += viewSize.width + (rowViews.count > 1 ? spacing : 0)
             x += viewSize.width + spacing
             maxHeight = max(maxHeight, viewSize.height)
+        }
+        
+        // Handle the last row
+        if !rowViews.isEmpty {
+            let rowCenter = bounds.midX
+            let rowStart = rowCenter - rowWidth / 2
+            
+            var xPos = rowStart
+            for rowView in rowViews {
+                let rowViewSize = rowView.sizeThatFits(.unspecified)
+                rowView.place(at: CGPoint(x: xPos, y: y), proposal: ProposedViewSize(width: rowViewSize.width, height: rowViewSize.height))
+                xPos += rowViewSize.width + spacing
+            }
         }
     }
 }
@@ -641,7 +641,7 @@ class CalendarData: ObservableObject {
     }
     
     // Calculate streak using the same logic as the widget
-    private func calculateStreak() -> Int {
+    func calculateStreak() -> Int {
         let calendar = Calendar.current
         let sortedDays = Array(completedDays).sorted()
         var count = 0

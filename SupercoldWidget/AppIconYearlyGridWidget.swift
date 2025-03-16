@@ -45,28 +45,30 @@ struct AppIconWidgetEntryView: View {
                 .padding(.horizontal, 5)
                 .padding(.vertical, 2)
                 
-                // Streak count at bottom
-                Text("\(streakCount)d")
-                    .font(.system(size: 10, weight: .bold, design: .rounded))
-                    .foregroundColor(.white)
-                    .padding(.vertical, 2)
-                    .padding(.horizontal, 8)
-                    .background(
-                        ZStack {
-                            // Shadow rectangle
-                            RoundedRectangle(cornerRadius: 5)
-                                .fill(Color.black)
-                                .offset(x: 1, y: 1)
-                            
-                            // Main rectangle
-                            RoundedRectangle(cornerRadius: 5)
-                                .fill(Color.pink)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .stroke(Color.black, lineWidth: 1)
-                                )
-                        }
-                    )
+                // Streak count at bottom - only show if streak > 1
+                if streakCount > 1 {
+                    Text("\(streakCount) days")
+                        .font(.system(size: 10, weight: .bold, design: .rounded))
+                        .foregroundColor(.white)
+                        .padding(.vertical, 2)
+                        .padding(.horizontal, 8)
+                        .background(
+                            ZStack {
+                                // Shadow rectangle
+                                RoundedRectangle(cornerRadius: 5)
+                                    .fill(Color.black)
+                                    .offset(x: 1, y: 1)
+                                
+                                // Main rectangle
+                                RoundedRectangle(cornerRadius: 5)
+                                    .fill(Color.pink)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(Color.black, lineWidth: 1)
+                                    )
+                            }
+                        )
+                }
             }
             .padding(5)
         }
@@ -138,9 +140,9 @@ struct CompactWeeklyGridView: View {
                 Circle()
                     .stroke(
                         isToday(date) ? 
-                            Color.white : 
+                            Color(red: 1.0, green: 0.4, blue: 0.7) : 
                             Color.clear,
-                        lineWidth: 1
+                        lineWidth: 1.5
                     )
             )
             .frame(width: 8, height: 8)

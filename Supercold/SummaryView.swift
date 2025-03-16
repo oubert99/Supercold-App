@@ -97,25 +97,45 @@ struct SummaryView: View {
         if yearlyShowerCount == 0 {
             baseText = "You did not take any cold shower yet! Try it :)"
         } else if monthlyShowerCount == 0 {
-            baseText = "You took \(yearlyShowerCount) cold showers in \(currentYear), none this month yet!"
+            baseText = "You took YEARLY_COUNT_PLACEHOLDER cold showers in YEAR_PLACEHOLDER, none this month yet!"
         } else {
-            baseText = "You took \(yearlyShowerCount) cold showers in \(currentYear), \(monthlyShowerCount) this month!\(moodsText)"
+            // Use placeholders for all numbers to avoid conflicts
+            baseText = "You took YEARLY_COUNT_PLACEHOLDER cold showers in YEAR_PLACEHOLDER, MONTHLY_COUNT_PLACEHOLDER this month!\(moodsText)"
         }
         
         var attributedString = AttributedString(baseText)
         
-        // Apply bold to the numbers only if they exist in the text
+        // Replace and style the yearly count placeholder
         if yearlyShowerCount > 0 {
-            if let yearlyRange = attributedString.range(of: "\(yearlyShowerCount)") {
-                attributedString[yearlyRange].font = .system(size: 32, weight: .black, design: .rounded)
-                attributedString[yearlyRange].foregroundColor = .black
+            if let yearlyCountPlaceholderRange = attributedString.range(of: "YEARLY_COUNT_PLACEHOLDER") {
+                let yearlyCountString = AttributedString("\(yearlyShowerCount)")
+                var styledYearlyCountString = yearlyCountString
+                styledYearlyCountString.font = .system(size: 32, weight: .black, design: .rounded)
+                styledYearlyCountString.foregroundColor = .black
+                
+                attributedString.replaceSubrange(yearlyCountPlaceholderRange, with: styledYearlyCountString)
+            }
+            
+            // Replace and style the year placeholder
+            if let yearPlaceholderRange = attributedString.range(of: "YEAR_PLACEHOLDER") {
+                let yearString = AttributedString("\(currentYear)")
+                var styledYearString = yearString
+                styledYearString.font = .system(size: 24, weight: .bold, design: .rounded)
+                styledYearString.foregroundColor = .black
+                
+                attributedString.replaceSubrange(yearPlaceholderRange, with: styledYearString)
             }
         }
         
+        // Replace and style the monthly count placeholder
         if monthlyShowerCount > 0 {
-            if let monthlyRange = attributedString.range(of: "\(monthlyShowerCount)") {
-                attributedString[monthlyRange].font = .system(size: 32, weight: .black, design: .rounded)
-                attributedString[monthlyRange].foregroundColor = .black
+            if let monthlyCountPlaceholderRange = attributedString.range(of: "MONTHLY_COUNT_PLACEHOLDER") {
+                let monthlyCountString = AttributedString("\(monthlyShowerCount)")
+                var styledMonthlyCountString = monthlyCountString
+                styledMonthlyCountString.font = .system(size: 32, weight: .black, design: .rounded)
+                styledMonthlyCountString.foregroundColor = .black
+                
+                attributedString.replaceSubrange(monthlyCountPlaceholderRange, with: styledMonthlyCountString)
             }
         }
         

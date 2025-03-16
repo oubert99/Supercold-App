@@ -7,7 +7,7 @@ struct MainTabView: View {
         TabView {
             ColdShowerLogView()
                 .tabItem {
-                    Label("Log", systemImage: "snowflake")
+                    Label("Today", systemImage: "snowflake")
                 }
             
             CalendarTrackerView()
@@ -23,6 +23,11 @@ struct MainTabView: View {
             SummaryView()
                 .tabItem {
                     Label("Summary", systemImage: "chart.bar.fill")
+                }
+            
+            ProfileView()
+                .tabItem {
+                    Label("Profile", systemImage: "person.fill")
                 }
         }
         .environmentObject(calendarData)

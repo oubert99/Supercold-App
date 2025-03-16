@@ -129,28 +129,30 @@ struct YearlyGridWidgetEntryView : View {
             )
             .padding(.horizontal, 8)
             
-            // Streak count
-            Text("\(streakCount) day streak")
-                .font(.system(size: 12, weight: .bold, design: .rounded))
-                .foregroundColor(.white)
-                .padding(.vertical, 3)
-                .padding(.horizontal, 10)
-                .background(
-                    ZStack {
-                        // Shadow rectangle
-                        RoundedRectangle(cornerRadius: 6)
-                            .fill(Color.black)
-                            .offset(x: 2, y: 2)
-                        
-                        // Main rectangle
-                        RoundedRectangle(cornerRadius: 6)
-                            .fill(Color.pink)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 6)
-                                    .stroke(Color.black, lineWidth: 2)
-                            )
-                    }
-                )
+            // Streak count - only show if streak > 1
+            if streakCount > 1 {
+                Text("\(streakCount) days super streak")
+                    .font(.system(size: 12, weight: .bold, design: .rounded))
+                    .foregroundColor(.white)
+                    .padding(.vertical, 3)
+                    .padding(.horizontal, 10)
+                    .background(
+                        ZStack {
+                            // Shadow rectangle
+                            RoundedRectangle(cornerRadius: 6)
+                                .fill(Color.black)
+                                .offset(x: 2, y: 2)
+                            
+                            // Main rectangle
+                            RoundedRectangle(cornerRadius: 6)
+                                .fill(Color.pink)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 6)
+                                        .stroke(Color.black, lineWidth: 2)
+                                )
+                        }
+                    )
+            }
         }
         .padding(10)
         .widgetURL(URL(string: "supercold://open"))
@@ -235,7 +237,7 @@ struct WeeklyGridView: View {
                             isToday(date) ? 
                                 Color.white : 
                                 Color.clear,
-                            lineWidth: 1.5
+                            lineWidth: 2
                         )
                 )
                 .frame(width: 12, height: 12)

@@ -113,27 +113,29 @@ struct CalendarTrackerView: View {
                                 .font(.system(size: viewMode == .yearly ? 40 : 45, weight: .black, design: .rounded))
                                 .foregroundColor(.black)
                             
-                            Text("\(streakCount) day streak")
-                                .font(.system(size: 18, weight: .bold, design: .rounded))
-                                .foregroundColor(.black)
-                                .padding(.vertical, 5)
-                                .padding(.horizontal, 15)
-                                .background(
-                                    ZStack {
-                                        // Shadow rectangle
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .fill(Color.black)
-                                            .offset(x: 3, y: 3)
-                                        
-                                        // Main rectangle
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .fill(Color.pink)
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 8)
-                                                    .stroke(Color.black, lineWidth: 3)
-                                            )
-                                    }
-                                )
+                            if streakCount > 1 {
+                                Text("\(streakCount) days super streak")
+                                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                                    .foregroundColor(.black)
+                                    .padding(.vertical, 5)
+                                    .padding(.horizontal, 15)
+                                    .background(
+                                        ZStack {
+                                            // Shadow rectangle
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .fill(Color.black)
+                                                .offset(x: 3, y: 3)
+                                            
+                                            // Main rectangle
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .fill(Color.pink)
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 8)
+                                                        .stroke(Color.black, lineWidth: 3)
+                                                )
+                                        }
+                                    )
+                            }
                         }
                         
                         Spacer()

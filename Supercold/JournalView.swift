@@ -12,7 +12,7 @@ struct JournalView: View {
             
             VStack(spacing: 20) {
                 // Header
-                Text("Cold Shower Journal")
+                Text("Journal")
                     .font(.system(size: 32, weight: .black, design: .rounded))
                     .foregroundColor(.white)
                     .padding(.top, 20)
